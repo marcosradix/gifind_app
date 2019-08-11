@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )
-                        : _createGitTable(context, snapshot);
+                        : _createGifTable(context, snapshot);
                 }
               },
             ),
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _createGitTable(BuildContext context, AsyncSnapshot snapshot) {
+  Widget _createGifTable(BuildContext context, AsyncSnapshot snapshot) {
     return Text(
       "Tudo certo por aqui.",
       style: TextStyle(color: Colors.white),
