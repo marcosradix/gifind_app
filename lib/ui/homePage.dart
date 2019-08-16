@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gifind_app/services/gifService.dart';
+import 'package:gifind_app/ui/gifDetailPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -126,6 +127,9 @@ class _HomePageState extends State<HomePage> {
                   ['fixed_height']['width']),
               fit: BoxFit.cover,
             ),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (_) => GifDetailPage(gifData:snapshot.data['data'][index])));
+            },
           );
         } else {
           return Container(
