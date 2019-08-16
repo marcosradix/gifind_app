@@ -12,7 +12,6 @@ class _HomePageState extends State<HomePage> {
 
   String _search;
   int _offset = 0;
-
   _getGifs() async {
     return await gifService.getGifs(search: _search, offset: _offset);
   }
@@ -20,8 +19,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _getGifs().then((data) {
-      //print(data);
+     _getGifs().then((data) {
+      //print(_updateScreeen);
     });
   }
 
@@ -128,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.cover,
             ),
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (_) => GifDetailPage(gifData:snapshot.data['data'][index])));
+              navigateToSubPage(snapshot, context, index);
             },
           );
         } else {
@@ -155,4 +154,9 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+
+  Future navigateToSubPage(AsyncSnapshot snapshot ,context, index) async {
+  bool data = await Navigator.push(context, MaterialPageRoute( builder: (context) => GifDetailPage(gifData:snapshot.data['data'][index])  ) );
+    print( data);
+}
 }

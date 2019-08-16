@@ -13,6 +13,7 @@ final Map gifData;
          centerTitle: true,
          title: Text(gifData['title']),
          backgroundColor: Colors.black,
+         leading: IconButton(icon:Icon(Icons.chevron_left),onPressed:() => Navigator.pop(context, false),),
       ),
       backgroundColor: Colors.black,
       body: Center(
