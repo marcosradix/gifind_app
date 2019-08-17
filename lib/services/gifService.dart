@@ -1,4 +1,9 @@
 
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:esys_flutter_share/esys_flutter_share.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
@@ -17,5 +22,12 @@ if(search == null){
    
   return json.decode( response.body );
 }
+
+    void onImageShared( Map gifData) async {
+      var request = await HttpClient().getUrl(Uri.parse(gifData['images']['fixed_height']['url']));
+      var response = await request.close();
+      Uint8List bytes = await consolidateHttpClientResponseBytes(response);
+      await Share.file(gifData['title'], 'gifind.jpg', bytes, 'image/jpg');
+    }
 
 }

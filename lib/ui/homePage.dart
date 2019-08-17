@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gifind_app/services/gifService.dart';
 import 'package:gifind_app/ui/gifDetailPage.dart';
-import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 
@@ -136,10 +135,7 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.cover,
             ),
             onLongPress: (){
-            Share.share(
-              snapshot.data['data'][index]['images']['fixed_height']['url']
-            );
-
+              gifService.onImageShared(snapshot.data['data'][index]);
             },
           ),
           ),
