@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gifind_app/services/gifService.dart';
 import 'package:gifind_app/ui/gifDetailPage.dart';
+import 'package:share/share.dart';
+import 'package:transparent_image/transparent_image.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -124,17 +127,20 @@ class _HomePageState extends State<HomePage> {
             onTap: (){
               navigateToSubPage(snapshot, context, index);
               },
-            child: Image.network(
-              snapshot.data['data'][index]['images']['fixed_height']['url'],
+            child: FadeInImage.memoryNetwork(
               key: Key(new DateTime.now().millisecondsSinceEpoch.toString() +
-                  snapshot.data['data'][index]['images']['fixed_height']
-                      ['mp4_size']),
-              height: double.parse(snapshot.data['data'][index]['images']
-                  ['fixed_height']['height']),
-              width: double.parse(snapshot.data['data'][index]['images']
-                  ['fixed_height']['width']),
+              snapshot.data['data'][index]['images']['fixed_height']['mp4_size']),
+              image: snapshot.data['data'][index]['images']['fixed_height']['url'], 
+              placeholder: kTransparentImage,
+              height: 300.0,
               fit: BoxFit.cover,
             ),
+            onLongPress: (){
+            Share.share(
+              snapshot.data['data'][index]['images']['fixed_height']['url']
+            );
+
+            },
           ),
           ),
         ),
