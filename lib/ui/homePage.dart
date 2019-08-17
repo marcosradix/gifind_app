@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gifind_app/services/gifService.dart';
 import 'package:gifind_app/ui/gifDetailPage.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -135,6 +136,7 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.cover,
             ),
             onLongPress: (){
+                HapticFeedback.mediumImpact();
               gifService.onImageShared(snapshot.data['data'][index]);
             },
           ),
