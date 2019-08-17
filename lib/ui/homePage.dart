@@ -114,7 +114,16 @@ class _HomePageState extends State<HomePage> {
       itemCount: _getCount(snapshot.data['data']),
       itemBuilder: (context, index) {
         if (_search == null || index < snapshot.data["data"].length) {
-          return GestureDetector(
+          return SizedBox(
+      width: 200,
+      child: Hero(
+        tag: index,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: (){
+              navigateToSubPage(snapshot, context, index);
+              },
             child: Image.network(
               snapshot.data['data'][index]['images']['fixed_height']['url'],
               key: Key(new DateTime.now().millisecondsSinceEpoch.toString() +
@@ -126,10 +135,10 @@ class _HomePageState extends State<HomePage> {
                   ['fixed_height']['width']),
               fit: BoxFit.cover,
             ),
-            onTap: (){
-              navigateToSubPage(snapshot, context, index);
-            },
-          );
+          ),
+          ),
+        ),
+      );
         } else {
           return Container(
             child: GestureDetector(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:swipedetector/swipedetector.dart';
+import 'package:share/share.dart';
 
 class GifDetailPage extends StatelessWidget {
 
@@ -14,11 +16,36 @@ final Map gifData;
          title: Text(gifData['title']),
          backgroundColor: Colors.black,
          leading: IconButton(icon:Icon(Icons.chevron_left),onPressed:() => Navigator.pop(context, false),),
+                 actions: <Widget>[
+          IconButton(icon:  Icon( Icons.share), onPressed: (){
+            Share.share(gifData['images']['fixed_height']['url']);
+          },
+          ),
+        ],
       ),
       backgroundColor: Colors.black,
       body: Center(
-        child: Image.network(gifData['images']['fixed_height']['url']),
+        child: SwipeDetector(
+          swipeConfiguration: SwipeConfiguration(
+            verticalSwipeMinVelocity: 100.0,
+            verticalSwipeMinDisplacement: 50.0,
+            verticalSwipeMaxWidthThreshold:100.0,
+            horizontalSwipeMaxHeightThreshold: 50.0,
+            horizontalSwipeMinDisplacement:50.0,
+            horizontalSwipeMinVelocity: 200.0
+          ),
+          child: Hero(
+          key: key,
+          tag: gifData['title'],
+          child: Image.network(gifData['images']['fixed_height']['url']),
+        ),
+        onSwipeDown: (){
+          Navigator.pop(context, false);
+        },
+        ),
       ),
     );
   }
+
+  
 }
